@@ -23,3 +23,8 @@ go.work.sum
 
 # env file
 .env
+
+# wails files
+app/build/bin
+app/node_modules
+app/frontend/dist

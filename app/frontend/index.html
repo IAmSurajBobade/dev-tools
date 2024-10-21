@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>myapp</title>
+        <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+        <style>
+            :root {
+                --bg-color: #333333;
+                --text-color: #ffffff;
+                --button-bg: #6a994e;
+                --button-text: #ffffff;
+                --menu-bg: #444444;
+                --menu-hover: #555555;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: 0;
+            }
+
+            #app {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            button {
+                background-color: var(--button-bg);
+                color: var(--button-text);
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                margin: 10px 0;
+            }
+
+            .menu-bar {
+                background-color: var(--menu-bg);
+                padding: 10px;
+            }
+
+            .menu-bar a {
+                color: var(--text-color);
+                text-decoration: none;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            .menu-bar a:hover {
+                background-color: var(--menu-hover);
+            }
+
+            textarea {
+                width: 100%;
+                height: 100px;
+                margin-bottom: 10px;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                border: 1px solid var(--text-color);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="menu-bar">
+            <a onclick="showHome()">Home</a>
+            <a onclick="showBase64()">Base64</a>
+        </div>
+        <div id="app">
+            <div id="content"></div>
+        </div>
+
+        <script>
+            function showHome() {
+                window.go.main.App.HandleHome().then(result => {
+                    document.getElementById('content').innerHTML = result;
+                });
+            }
+
+            function showBase64() {
+                window.go.main.App.HandleBase64().then(result => {
+                    document.getElementById('content').innerHTML = result;
+                });
+            }
+
+            function encodeBase64() {
+                const input = document.getElementById('input').value;
+                window.go.main.App.HandleBase64Encode(input).then(result => {
+                    document.getElementById('output').innerHTML = result;
+                });
+            }
+
+            function decodeBase64() {
+                const input = document.getElementById('input').value;
+                window.go.main.App.HandleBase64Decode(input).then(result => {
+                    document.getElementById('output').innerHTML = result;
+                });
+            }
+
+            // Load home content by default
+            showHome();
+        </script>
+    </body>
+</html>
